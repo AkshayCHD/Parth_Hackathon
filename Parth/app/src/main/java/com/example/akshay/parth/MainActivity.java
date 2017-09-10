@@ -5,22 +5,13 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.google.firebase.auth.UserInfo;
 
-import static android.R.attr.x;
 
 public class MainActivity extends AppCompatActivity {
 
-    public UserInfo user;
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v13.app.FragmentStatePagerAdapter}.
-     */
+
+
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     /**
@@ -45,5 +36,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
 
+
+
+
     }
+
 }

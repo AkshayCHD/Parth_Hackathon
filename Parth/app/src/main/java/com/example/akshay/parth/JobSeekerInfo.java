@@ -15,6 +15,9 @@ public class JobSeekerInfo implements Serializable {
     private String address;
     private String Segment;
 
+    public JobSeekerInfo(){
+
+    }
     public JobSeekerInfo(String title){
         Title=title;
         Description="This is for a plumber job";
