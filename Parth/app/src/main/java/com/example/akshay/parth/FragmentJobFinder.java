@@ -40,11 +40,10 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
 
     private FloatingActionButton addButton;
 
-
+    private AdapterJobs mJobsAdapter;
 
     public  FragmentJobFinder(){
         infolist=new ArrayList<>();
-
 
 
     }
@@ -52,25 +51,75 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
         View rootView = inflater.inflate(R.layout.jobs_fragment,container,false);
+
+
+        mFirebaseDatabase=FirebaseDatabase.getInstance();
+
+        mNotifyDatabaseReference=mFirebaseDatabase.getReference().child("JobSeekers");
+
+        if(mChildEventListener==null) {
+            mChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Log.i("bafila rocks","chal bhosdike chup");
+                    JobSeekerInfo notification=dataSnapshot.getValue(JobSeekerInfo.class);
+                    Log.i("bafila rocks","chal bhosdike chup2");
+                    int k = 0;
+                    for(JobSeekerInfo j : infolist){
+                        if(j.getNameUser().equals(notification.getNameUser())) {
+                            k = 1;
+                            break;
+                        }
+                    }
+                    if(k == 0)
+                        infolist.add(0,notification);
+                    Log.i("bafila rocks","chal bhosdike chup3");
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+
+            mNotifyDatabaseReference.addChildEventListener(mChildEventListener);
+
+        }
+
+        mJobsAdapter=new AdapterJobs(infolist, this);
+
 
 
         mJobsRecyclerView=rootView.findViewById(R.id.Jobs_RecyclerView);
         LinearLayoutManager linearlayout=new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false);
         mJobsRecyclerView.setLayoutManager(linearlayout);
-        AdapterJobs mJobsAdapter=new AdapterJobs(infolist, this);
+
         mJobsRecyclerView.setAdapter(mJobsAdapter);
-
-
 
         for(JobSeekerInfo i:infolist ){
             Log.i("message",i.getNameUser());
             Log.i("message",String.valueOf(infolist.size()));
         }
 
-        mFirebaseDatabase=FirebaseDatabase.getInstance();
-
-        mNotifyDatabaseReference=mFirebaseDatabase.getReference().child("JobSeekers");
 
         addButton=(FloatingActionButton)rootView.findViewById(R.id.FAB);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +151,7 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
 
         }
         else{
-            Intent i=new Intent(getActivity(),JobDescription.class);
+            Intent i=new Intent(getActivity(),ChatActivity.class);
             startActivity(i);
 
         }
@@ -113,59 +162,20 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
     public void onPause() {
         super.onPause();
         detachDatabaseReadListener();
-    }
-
-    public void OnsignInInitialize(){
-        if(mChildEventListener==null) {
-            mChildEventListener = new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Log.i("bafila rocks","chal bhosdike chup");
-                    JobSeekerInfo notification=dataSnapshot.getValue(JobSeekerInfo.class);
-                    Log.i("bafila rocks","chal bhosdike chup2");
-                    infolist.add(notification);
-                    Log.i("bafila rocks","chal bhosdike chup3");
-
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-
-            mNotifyDatabaseReference.addChildEventListener(mChildEventListener);
-
-        }
-//        Collections.reverse(infolist);
-
 
     }
+
+
     private void detachDatabaseReadListener() {
         if (mChildEventListener!=null){
             mNotifyDatabaseReference.removeEventListener(mChildEventListener);
             mChildEventListener=null;
+
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        OnsignInInitialize();
     }
 }

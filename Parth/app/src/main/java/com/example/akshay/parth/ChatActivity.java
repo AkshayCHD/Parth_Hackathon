@@ -185,6 +185,12 @@ public class ChatActivity extends AppCompatActivity {
                     startActivity(new Intent(ChatActivity.this, LoginActivity.class));
                     finish();
                 }
+                else{
+                    int index;
+                    mUsername=user.getEmail();
+                    index=mUsername.indexOf('@');
+                    mUsername=mUsername.substring(0,index);
+                }
             }
         };
 
