@@ -16,6 +16,12 @@ public class FragmentRedAlert extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.red_alert_fragment,container,false);
+
+
+
+
+
+
         return rootView;
     }
 }

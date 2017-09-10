@@ -29,11 +29,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-
             default:
-                return new FragmentRedAlert();
-
-
+                return new FragmentJobFinder();
         }
 
     }
