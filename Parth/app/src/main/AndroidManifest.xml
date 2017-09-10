@@ -7,10 +7,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="PARTH"
         android:roundIcon="@mipmap/ic_launcher_round"
+
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"/>
         <activity android:name=".ChatActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +23,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".SignupActivity"></activity>
+
+        <activity android:name=".JobDescription"></activity>
     </application>
 
 </manifest>
