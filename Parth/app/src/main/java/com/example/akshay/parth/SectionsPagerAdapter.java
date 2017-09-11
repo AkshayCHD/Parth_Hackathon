@@ -29,25 +29,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            default:
+            case 2:
                 return new FragmentJobFinder();
+            default:
+                return new FragmentRedAlert();
         }
 
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch(position){
-            case 1:
-                return "Files";
-            case 2:
-                return "PDF";
-            case 0:
-                return "Notes";
-            default:
-                return "Files";
 
-        }
+        return null;
 
     }
 }
