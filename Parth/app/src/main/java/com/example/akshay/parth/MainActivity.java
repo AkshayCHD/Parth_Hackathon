@@ -118,13 +118,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
             startActivity(intent);
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + phone ));
+            callIntent.setData(Uri.parse("tel:" + phone));
             startActivity(callIntent);
 
             return true;
 
-        }else
+        } else
             return super.onKeyDown(keyCode, event);
+
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
