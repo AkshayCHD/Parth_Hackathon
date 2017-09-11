@@ -48,6 +48,12 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
 
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +65,9 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
         mFirebaseDatabase=FirebaseDatabase.getInstance();
 
         mNotifyDatabaseReference=mFirebaseDatabase.getReference().child("JobSeekers");
+
+        detachDatabaseReadListener();
+
 
         if(mChildEventListener==null) {
             mChildEventListener = new ChildEventListener() {
@@ -152,6 +161,14 @@ public class FragmentJobFinder extends Fragment implements AdapterJobs.ListItemC
         }
         else{
             Intent i=new Intent(getActivity(),ChatActivity.class);
+            JobSeekerInfo object = new JobSeekerInfo("default");
+            for(JobSeekerInfo i1:infolist){
+                if(i1.getPhnNoUser().equals(phnNumber)){
+                    object=i1;
+
+                }
+            }
+            i.putExtra("extra",object);
             startActivity(i);
 
         }

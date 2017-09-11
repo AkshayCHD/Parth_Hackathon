@@ -3,12 +3,18 @@ package com.example.akshay.parth;
 
 import android.content.Intent;
 
+
+import android.net.Uri;
 import android.support.annotation.NonNull;
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.view.KeyEvent;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -51,6 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+//You tab icons
+        int[] icons = {
+                R.drawable.folder,
+                R.drawable.security,
+                R.drawable.work,
+                R.drawable.textviewer,
+        };
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
@@ -91,6 +110,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)) {
+
+            String phone = "08039514866";
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+            startActivity(intent);
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + phone ));
+            startActivity(callIntent);
+
+            return true;
+
+        }else
+            return super.onKeyDown(keyCode, event);
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
@@ -111,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void signOut() {
         auth.signOut();
+
     }
 
 
