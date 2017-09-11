@@ -30,10 +30,15 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
 
+            case 1:
+                return new FragmentComplaint();
+
+
             case 0:
                 return new tutorial();
             case 3:
                 return new FragmentOcr();
+
             case 2:
                 return new FragmentJobFinder();
             default:

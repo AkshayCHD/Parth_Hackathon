@@ -130,7 +130,12 @@ public class MainActivity extends AppCompatActivity {
 
         } else
             return super.onKeyDown(keyCode, event);
+
+
     }
+
+    
+
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
