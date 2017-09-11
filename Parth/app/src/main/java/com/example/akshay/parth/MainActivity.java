@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.folder,
                 R.drawable.security,
                 R.drawable.work,
-                R.drawable.alert,
                 R.drawable.textviewer,
         };
 
