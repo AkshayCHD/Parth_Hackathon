@@ -1,10 +1,13 @@
 package com.example.akshay.parth;
 
 
+import android.content.ComponentName;
 import android.content.Intent;
 
 
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.TabLayout;
@@ -23,12 +26,14 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.InputStream;
 
 import static com.example.akshay.parth.R.id.sign_out_menu;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int CAMERA_PIC_REQUEST = 1;//firstly define this
+
 
 
 
@@ -118,14 +123,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
             startActivity(intent);
             Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + phone ));
+            callIntent.setData(Uri.parse("tel:" + phone));
             startActivity(callIntent);
 
             return true;
 
-        }else
+        } else
             return super.onKeyDown(keyCode, event);
-
+    }
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
@@ -150,4 +155,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void cliclMe(View view) {
+
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA_PIC_REQUEST );
+}
+
+
+    public void Source(View view) {
+        Intent i=new Intent(this,Source.class);
+        startActivity(i);
+    }
 }
