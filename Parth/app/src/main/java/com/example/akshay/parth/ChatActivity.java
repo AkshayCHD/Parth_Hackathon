@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,8 +76,18 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        mUsername = ANONYMOUS;
 
+        Intent i = getIntent();
+        JobSeekerInfo object = (JobSeekerInfo) i.getSerializableExtra("extra");
+
+        TextView description = (TextView)findViewById(R.id.description);
+        description.setText("DESC: "+object.getDescriptionUser());
+
+        TextView address = (TextView)findViewById(R.id.address);
+        address.setText("ADDRESS: "+object.getAddressUser());
+
+
+        mUsername = ANONYMOUS;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseStorage = FirebaseStorage.getInstance();
         mDatabaseReference = mFirebaseDatabase.getReference().child("messages");

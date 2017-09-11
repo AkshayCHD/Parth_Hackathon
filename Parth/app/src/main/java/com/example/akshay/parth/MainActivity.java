@@ -51,6 +51,20 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+//You tab icons
+        int[] icons = {
+                R.drawable.folder,
+                R.drawable.security,
+                R.drawable.work,
+                R.drawable.alert,
+                R.drawable.textviewer,
+        };
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
